@@ -56,11 +56,11 @@ Router.post('/', ({body}, res) => {
             .save()
             .then(idea => {
                 // req.flash('success_msg', 'The note has been deleted');
-                res.redirect('/');
+                res.redirect('/ideas');
                 }
             )
         }
-    })
+    });
 
 
 Router.put('/:id', (req, res) => {

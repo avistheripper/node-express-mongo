@@ -6,6 +6,7 @@ const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
 const ideasRouter = require('./routes/ideas');
+const usersRouter = require('./routes/users');
 
 const app = express();
 
@@ -67,19 +68,12 @@ app.get('/about', (req, res) => {
     res.render('about');
 });
 
-app.get('/users/login', (req, res) => {
-    res.render('./login');
-});
 
-// User register route
 
-app.get('/users/register', (req, res) => {
-    res.send('Register form')
-});
-
-// Init ideas router
+// Init ideas/users router
 
 app.use('/ideas', ideasRouter);
+app.use('/users', usersRouter)
 
 app.listen(port);
 console.log(`Vidjot is running at ${port}`);
