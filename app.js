@@ -1,0 +1,86 @@
+const express = require('express');
+const exphbs = require('express-handlebars');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const flash = require('connect-flash');
+const session = require('express-session');
+const ideasRouter = require('./routes/ideas');
+
+const app = express();
+
+// Connecting to DB
+
+const db = mongoose.connect('mongodb://localhost/vidjot-dev');
+
+mongoose.connection.once('connected', () => {
+    console.log('MongoDB connected...');
+});
+
+// Setting the port
+
+const port = process.env.PORT || 9090;
+
+// Override mw
+
+app.use(methodOverride('_method'));
+
+// Handlebars mw
+
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+// Body parser mw
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+//Express-session & connect-flash
+
+app.use(session({
+    secret: 'your mom',
+    resave: true,
+    saveUninitialized: true, 
+    cookie: {secure: true}
+}));
+app.use(flash());
+
+// Globals
+
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
+
+// Index route
+
+app.get('/', (req, res) => {
+    const title = 'Welcome';
+    res.render('index', {title});
+});
+
+// About route
+
+app.get('/about', (req, res) => {
+    res.render('about');
+});
+
+app.get('/users/login', (req, res) => {
+    res.render('./login');
+});
+
+// User register route
+
+app.get('/users/register', (req, res) => {
+    res.send('Register form')
+});
+
+// Init ideas router
+
+app.use('/ideas', ideasRouter);
+
+app.listen(port);
+console.log(`Vidjot is running at ${port}`);
+
