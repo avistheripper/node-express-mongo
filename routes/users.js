@@ -2,12 +2,12 @@ const express = require('express');
 const usersRouter = express.Router();
 
 usersRouter.get('/login', (req, res) => {
-    res.render('./login');
+    res.render('users/login');
 });
 
 
 usersRouter.get('/register', (req, res) => {
-    res.send('Register form')
+    res.render('users/register')
 });
 
 module.exports = usersRouter;
