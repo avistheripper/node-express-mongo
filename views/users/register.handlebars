@@ -1,23 +1,50 @@
-<div class="card card-body text-white bg-dark">
+
+{{#each errors}}
+<div class="alert alert-danger">{{text}}</div>
+{{else}}
+
+{{/each}}<div class="card card-body text-white bg-dark">
     <div class="card-title"><h4>Sign up</h4></div>
     <hr>
     <img src="/img/logo.png" class="logo mx-auto" alt="">
-    <form action="/ideas" method="POST">
+    <form action="/users/register" method="POST">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" name="name" placeholder="Enter username" required>
+            <input type="text"
+                   class="form-control"
+                   name="name"
+                   placeholder="Enter username"
+                   value="{{name}}" 
+                   required
+            >
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" name="email" placeholder="Enter email" required>
+            <input type="email"
+                   class="form-control"
+                   name="email"
+                   placeholder="Enter email" 
+                   value="{{email}}"
+                   required
+            >
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="Enter the password" required>
+            <input type="password"
+                   class="form-control"
+                   name="password"
+                   placeholder="Enter the password"
+                   required
+            >
         </div>
         <div class="form-group">
             <label for="password2">Confirm Password</label>
-            <input type="password" class="form-control" name="password2" placeholder="Confirm the password" required>
+            <input type="password"
+                   class="form-control"
+                   name="password2"
+                   placeholder="Confirm the password" 
+                   required
+            >
         </div>
         <button type="submit" class="btn btn-success btn-block">Submit</button>
     </form>
