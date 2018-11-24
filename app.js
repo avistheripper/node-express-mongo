@@ -17,7 +17,7 @@ const usersRouter = require('./routes/users');
 
 // Passport config
 
-require('./config/passport');
+require('./config/passport')(passport);
 
 // Connecting to DB
 
@@ -57,6 +57,11 @@ app.use(session({
     saveUninitialized: true, 
     cookie: {secure: true}
 }));
+
+// Pssport mw
+
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 
 // Globals
@@ -65,6 +70,7 @@ app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
     next();
 });
 
