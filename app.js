@@ -2,14 +2,22 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const mongoose = require('mongoose');
+const passport = require('passport');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
+
+const app = express();
+
+// Roters
+
 const ideasRouter = require('./routes/ideas');
 const usersRouter = require('./routes/users');
 
-const app = express();
+// Passport config
+
+require('./config/passport');
 
 // Connecting to DB
 
