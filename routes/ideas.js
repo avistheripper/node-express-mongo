@@ -48,11 +48,11 @@ Router.post('/', ({body}, res) => {
             details
         })
     } else {
-        const newUser = {
+        const newIdea = {
             title,
             details
         }
-        new Idea(newUser)
+        new Idea(newIdea)
             .save()
             .then(idea => {
                 // req.flash('success_msg', 'The note has been deleted');

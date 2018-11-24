@@ -1,10 +1,18 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+// const passport = require('passport');
+
+
 const usersRouter = express.Router();
 /*
 @GET '/login' render login form
 @GET '/register' render register form
 @POST 
 */
+
+require('../models/User');
+const User = mongoose.model('users');
 
 usersRouter.get('/login', (req, res) => {
     res.render('users/login');
@@ -27,7 +35,31 @@ usersRouter.post('/register', ({body}, res) => {
             email
         }));
     } else {
-        res.send('passed');
+        User.findOne({
+            email
+        })
+        .then((user) => {
+            if(user) {
+                res.send('The email is already taken.')
+            } else {
+                let newUser = new User({
+                    name,
+                    email,
+                    password
+                });
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(newUser.password, salt, (err, hash) => {
+                    if(err) throw err;
+                    newUser.password = hash;
+                    newUser.save()
+                        .then(user => {
+                            res.redirect('/');
+                        })
+                        .catch(err => console.log(err));
+                        })
+                });
+            }
+        })
     }
 });
 
