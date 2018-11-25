@@ -1,31 +1,21 @@
+{{#each errors}}
+  <div class="alert alert-danger">{{text}}</div>
+{{else}}
 
-<div class="card card-body text-white bg-dark">
-    <div class="card-title"><h4>Edit Note Idea</h4></div>
-    <hr>
-    <form action="/ideas/{{id}}?_method=PUT" method="POST">
+{{/each}}
+
+<div class="card card-body">
+  <h3>Edit Video Idea</h3>
+  <form action="/ideas/{{idea.id}}?_method=PUT" method="post">
     <input type="hidden" name="_method" value="PUT">
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input 
-                type="text"
-                class="form-control"
-                name="title"
-                placeholder="Type a title"
-                value="{{title}}"
-                required
-            >
-        </div>
-        <div class="form-group">
-            <label for="details">Details</label>
-            <textarea
-                class="form-control"
-                name="details"
-                placeholder="Type description"
-                required
-            >
-            {{details}}
-            </textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Save</button>
-    </form>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" name="title" value="{{idea.title}}" required>
+    </div>
+    <div class="form-group">
+      <label for="details">Details</label>
+      <textarea class="form-control" name="details" required>{{idea.details}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 </div>

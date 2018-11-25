@@ -1,1 +1,4 @@
     // "code": "sudo code --user-data-dir='~/.vscode-root'"
+// mongoose.connection.once('connected', () => {
+    console.log('MongoDB connected...');
+});

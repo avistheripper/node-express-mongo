@@ -1,22 +1,13 @@
 {{#each ideas}}
-<div class="card text-white bg-dark mb-2">
-    <div class="card-header">
-        Note
-    </div>
-    <div class="card-body">
-        <h5 class="card-title">{{title}}</h5>
-        <p>{{details}}</p>
-        <footer class="blockquote-footer">The note was written by <cite title="Source Title">User #1</cite></footer>
-        <hr>
-        <a href="ideas/edit/{{id}}" class="btn btn-success btn-block mb-3">Edit</a>
-        <form method="post" action="/ideas/{{id}}?_method=DELETE">
-        <input type="hidden" name="_method" value="DELETE">
-            <input type="submit" class="btn btn-danger btn-block" value="Delete">
-        </form>
-        
-    </div>
-</div>
-
+  <div class="card card-body mb-2">
+    <h4>{{title}}</h4>
+    <p>{{details}}</p>
+    <a class="btn btn-dark btn-block mb-2" href="/ideas/edit/{{id}}">Edit</a>
+    <form method="post" action="/ideas/{{id}}?_method=DELETE">
+      <input type="hidden" name="_method" value="DELETE">
+      <input type="submit" class="btn btn-danger btn-block" value="Delete">
+    </form>
+  </div>
 {{else}}
-    <p>No data provided with Database</p>
+  <p>No video ideas listed</p>
 {{/each}}
