@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Brad Traversy",
-  "license": "MIT",
+  "author": "Igor Drozdov",
+  "license": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.1",
